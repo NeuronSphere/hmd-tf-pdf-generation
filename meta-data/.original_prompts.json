@@ -1,0 +1,13 @@
+{
+  "_org": "hmd",
+  "_repo_type": "tf-",
+  "short_name": "pdf-generation",
+  "project_name": "hmd-tf-pdf-generation",
+  "repo_name": "hmd-tf-pdf-generation",
+  "description": "Example Transform Image to generate a PDF",
+  "_author": "Alex Burgoon",
+  "_author_email": "alex.burgoon@hmdlabs.io",
+  "module_name": "hmd_tf_pdf_generation",
+  "_template": "/tmp/tmp933h6v6o/hmd_cli_repo",
+  "_output_dir": "/home/aburg/hmd-public-examples/projects"
+}

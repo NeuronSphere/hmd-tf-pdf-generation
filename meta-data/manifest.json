@@ -1,0 +1,37 @@
+{
+  "identifier": "hmd-tf-pdf-generation",
+  "name": "repo_name",
+  "description": "Example Transform Image to generate a PDF",
+  "project_type": {
+    "name": "Transform Image",
+    "facets": [
+      "default_repo",
+      "transform_repo"
+    ]
+  },
+  "build": {
+    "commands": [
+      [
+        "python"
+      ],
+      [
+        "docker"
+      ]
+    ]
+  },
+  "docker": {
+    "build": {
+      "context_dir": "./",
+      "install_local": true
+    }
+  },
+  "deploy": {
+    "commands": [
+      [
+        "docker"
+      ]
+    ],
+    "dependencies": {},
+    "default_configuration": {}
+  }
+}
