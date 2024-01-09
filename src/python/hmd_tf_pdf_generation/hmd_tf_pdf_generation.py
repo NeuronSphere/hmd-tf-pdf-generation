@@ -6,6 +6,12 @@ from pathlib import Path
 import shutil
 from typing import Dict
 
+from reportlab.pdfgen import canvas
+from reportlab.platypus import Table, SimpleDocTemplate, Paragraph
+import pandas as pd
+import numpy as np
+
+
 logging.basicConfig(
     stream=sys.stdout,
     format="%(levelname)s %(asctime)s - %(message)s",
@@ -33,14 +39,22 @@ def do_transform(
     Returns:
         int: exit code
     """
-    for x in os.listdir(input_content_path):
-        logger.info(f"Processing input file {x}...")
-        shutil.copy(input_content_path / x, output_content_path / "sample_output.txt")
+    # Get data into pandas DataFrame
+    # Can be from SQL with read_sql() or some other method
 
-    secret_path = Path("/run/secrets")
+    # Random data
+    df = pd.DataFrame(np.random.randint(0, 100, size=(10, 3)), columns=list("ABC"))
+    output_filepath = os.path.join(
+        output_content_path, f"{transform_instance_context['filename']}.pdf"
+    )
 
-    for x in os.listdir(secret_path):
-        logger.info(f"This is how to locate a secret: {x} in {secret_path}")
+    doc = SimpleDocTemplate(output_filepath)
+    story = [Paragraph(transform_instance_context["title"])]
+
+    t = Table(df.values.tolist())
+    story.append(t)
+
+    doc.build(story)
 
     logger.info(f"Transform_nid: {transform_nid}")
     logger.info(f"Transform_instance_context: {transform_instance_context}")
