@@ -7,7 +7,7 @@ Welcome to HMD hmd-tf-pdf-generation's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   transforms.rst
+   readme.rst
 
 Indices and tables
 ==================

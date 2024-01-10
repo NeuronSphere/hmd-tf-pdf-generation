@@ -1,1 +1,2 @@
 hmd-lib-robot-shared
+PyMuPDF

@@ -7,7 +7,11 @@ import shutil
 from typing import Dict
 
 from reportlab.pdfgen import canvas
-from reportlab.platypus import Table, SimpleDocTemplate, Paragraph
+from reportlab.platypus import Table, SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.rl_config import defaultPageSize
+from reportlab.lib.units import inch
 import pandas as pd
 import numpy as np
 
@@ -48,10 +52,22 @@ def do_transform(
         output_content_path, f"{transform_instance_context['filename']}.pdf"
     )
 
-    doc = SimpleDocTemplate(output_filepath)
-    story = [Paragraph(transform_instance_context["title"])]
+    Title = transform_instance_context["title"]
 
-    t = Table(df.values.tolist())
+    # Get PDF Styles
+    styles = getSampleStyleSheet()
+    styleNormal = styles["Normal"]
+    styleHeading = styles["Heading1"]
+
+    doc = SimpleDocTemplate(output_filepath)
+    story = []
+
+    # Add Heading
+    story.append(Paragraph(Title, style=styleHeading))
+
+    data = [df.columns.tolist(), *df.values.tolist()]
+
+    t = Table(data, style=[("GRID", (0, 0), (-1, -1), 0.5, colors.grey)])
     story.append(t)
 
     doc.build(story)
